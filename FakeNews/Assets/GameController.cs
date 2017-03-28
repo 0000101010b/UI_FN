@@ -323,22 +323,35 @@ public class GameController : MonoBehaviour {
         List<string[][]> oldfile = csv.ToList();
         for (int i = 0; i < oldfile.Count; i++)
         {
-           
-                string _2 = oldfile[i][1][0];
-                string _1 = oldfile[i][0][0];
+            List<string> strings = new List<string>();
+            for (int j = 0; j < oldfile[i].Length; j++)
+            {
 
-                List<string> strings = new List<string>();
-                strings.Add(_1);
-                strings.Add(_2);
-
-                string line = string.Join(",", strings.ToArray());
-                newFile.Add(line);
+                strings.Add(oldfile[i][j][0]);
+                //string _2 = oldfile[i][1][0];
+                //string _1 = oldfile[i][0][0];
+                //List<string> strings = new List<string>();
+                //strings.Add(_1);
+                //strings.Add(_2);
+            }
+            string line = string.Join(",", strings.ToArray());
+            newFile.Add(line);
         }
 
         File.WriteAllLines(to, newFile.ToArray());
     }
 
 
+    public GameObject newsSite;
+    public void offPage()
+    {
+        newsSite.SetActive(false);
+    }
+
+    public void onPage()
+    {
+        newsSite.SetActive(true);
+    }
 }
 
 

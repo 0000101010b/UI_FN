@@ -1,6 +1,7 @@
-Subject, Content 
-Vladimir Putin, Eats Horse
-Hilary Clinton,Ties to ISIS
-Hilary Clinton,Plans to Retire To North Korea
-Donald Trump,ISIS Secret Spy
-Crooked Hilary,Plans to Retire To North Korea
+Topic,subjective,Event,Gender,Race,Religion,class,Politics,Nationality,Pref Religion,Pref_ethnicity ,Pref_gender,pref_class,pref_nationality,pref_political
+,,,MALE,WHITE,CHRISTIAN,LOW,CONSERVATIVE,AMERICAN,0;0;0;0;0,0;0;0;0;0;0;0;0;0;0,0;0;0;0;0;0;0;0;0;0;0;0,0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0,0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0,0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+Hillary Clinton,is Dead,,MALE,WHITE,CHRISTIAN,LOW,CONSERVATIVE,AMERICAN,0;0;0;0;0,0;0;0;0;0;0;0;0;0;0,0;0;0;0;0;0;0;0;0;0;0;0,0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0,0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0,0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+Hillary Clinton,is Dead,,MALE,WHITE,CHRISTIAN,LOW,CONSERVATIVE,AMERICAN,0;0;0;0;0,0;0;0;0;0;0;0;0;0;0,0;0;0;0;0;0;0;0;0;0;0;0,0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0,0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0,0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+Hilary Clinton,is Dead,,MALE,WHITE,CHRISTIAN,LOW,CONSERVATIVE,AMERICAN,0;0;0;0;0,0;0;0;0;0;0;0;0;0;0,0;0;0;0;0;0;0;0;0;0;0;0,0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0,0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0,0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+Hilary Clinton,Retires To North Korea,,MALE,WHITE,CHRISTIAN,LOW,CONSERVATIVE,AMERICAN,0;0;0;0;0,0;0;0;0;0;0;0;0;0;0,0;0;0;0;0;0;0;0;0;0;0;0,0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0,0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0,0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0
+Donald Trump,Atted gay conversion camp,,MALE,WHITE,CHRISTIAN,LOW,CONSERVATIVE,AMERICAN,0;0;0;0;0,0;0;0;0;0;0;0;0;0;0,0;0;0;0;0;0;0;0;0;0;0;0,0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0,0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0,0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0
