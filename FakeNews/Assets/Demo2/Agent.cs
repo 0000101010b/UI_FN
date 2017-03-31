@@ -12,13 +12,14 @@ public class Agent {
     public float[] personality;
     //public int[] following;
     public string name;
-    public int[] tweetsMade;
-    public int[] tweetsRead;
+    //public int[] tweetsMade;
+    //public int[] tweetsRead;
     int id;
     private FSM<Agent> stateMachine;
     public List<int> followingList;
     List<int> tweetMade;
     List<int> readTweets;
+    List<int> tweetsRetweeted;
 
     public Identity identity;
 
@@ -253,7 +254,8 @@ public class Agent {
             followingList.Add(f);
         }
         tweetMade = new List<int>();
-        readTweets= new List<int>();
+        readTweets = new List<int>();
+        tweetsRetweeted = new List<int>();
 
         /* Debug.Log(identity.age);
          Debug.Log(identity.g);
@@ -283,12 +285,6 @@ public class Agent {
         ReadNewsFeed(p,agents, ref tweets);
     }
 
-    public void MakeTweet(ref List<Tweet> tweets)
-    {
-        Tweet tweet = new Tweet(id,"im a unicorn", identity);
-        tweets.Add(tweet);
-        tweetMade.Add(tweets.Count-1);//id of tweet
-    }
 
     float sumOfAbs(float[] t)
     {
@@ -337,6 +333,12 @@ public class Agent {
                 identity.pref_political[(int)t.I.p] });
         return (opinion_poster + (opinion_religion + opinion_ethnicity + opinion_gender + opinion_class + opinion_nationality + opinion_political) / 6f) / 2f;
     }
+    public void MakeTweet(ref List<Tweet> tweets)
+    {
+        Tweet tweet = new Tweet(id, "im a unicorn", identity);
+        tweets.Add(tweet);
+        tweetMade.Add(tweets.Count - 1);//id of tweet
+    }
     public void likeTweet(int t, ref List<Tweet> tweets)
     {
         tweets[t].LikeTweet();
@@ -349,7 +351,8 @@ public class Agent {
         followingList.Remove(tweets[t].posterId);
     }
     public void retweet(int t, ref List<Tweet> tweets) {
-        tweets[t].reposterIds.Add(id);
+        tweets[t].repostTweet(id);
+        tweetsRetweeted.Add(t);
     }
 
     public void ReadPlayerNewsFeed(Player p, ref List<Tweet> tweets)
@@ -357,21 +360,21 @@ public class Agent {
             for (int i = 0; i < p.tweets_Ids.Count;i++)
             {
                 int t = p.tweets_Ids[i];
-                bool isFound = false;
-                for (int k = 0; k < readTweets.Count; k++)
+                if (readTweets.Contains(t))
                 {
-                    if (readTweets[k] == t)
-                    {
-                        isFound = true;
-                        break;
-                    }
+                    continue;
                 }
 
-                if (isFound)
-                    continue;
-                if (OpinionAbout(tweets[t]) > 0.3f)
-                        tweets[t].LikeTweet();
-                    readTweets.Add(t);
+                float opinion = OpinionAbout(tweets[t]);
+                if (opinion < -0.05f && opinion > -0.3)//just boring -> unfollow
+                    unfollow(t, ref tweets);
+                if (opinion < -0.4)//look ! that guy posts crap
+                    retweet(t, ref tweets);
+                if (opinion > 0.1f)//nice !
+                    likeTweet(t, ref tweets);
+                if (opinion > 0.3f) //<3
+                    retweet(t, ref tweets);
+                readTweets.Add(t);
             }
         
     }
@@ -388,29 +391,37 @@ public class Agent {
             if (followingList[i] == -1)
                 continue;
             Agent a = agents[followingList[i]];
-            for(int j=0;j<a.tweetMade.Count;j++)
+            for (int j = 0; j < a.tweetMade.Count; j++)
             {
-
                 int t = a.tweetMade[j];
-                bool isFound=false;
-                for (int k = 0; k < readTweets.Count; k++)
-                {
-                    if (readTweets[k] == t) {
-                        isFound = true;
-                        break;
-                    }
-                }
-
-                if (isFound)
+                if (readTweets.Contains(t))
                     continue;
-
-                if (OpinionAbout(tweets[t]) > 0.3f)
-                    tweets[t].LikeTweet();
-                
+                float opinion = OpinionAbout(tweets[t]);
+                if (opinion < -0.05f && opinion > -0.3)//just boring -> unfollow
+                    unfollow(t, ref tweets);
+                if (opinion < -0.4)//look ! that guy posts crap
+                    retweet(t, ref tweets);
+                if (opinion > 0.1f)//nice !
+                    likeTweet(t, ref tweets);
+                if (opinion > 0.3f) //<3
+                    retweet(t, ref tweets);
                 readTweets.Add(t);
-
             }
-            
+            for (int j = 0; j < a.tweetsRetweeted.Count; j++)
+            {
+                int t = a.tweetsRetweeted[j];
+                if (readTweets.Contains(t))
+                    continue;
+                float opinion = OpinionAbout(tweets[t]);
+                if (opinion < -0.4)//look ! that guy posts crap
+                    follow(t, ref tweets);
+                if (opinion > 0.2f)//nice !
+                    follow(t, ref tweets);
+                if (opinion > 0.3) //<3
+                    retweet(t, ref tweets);
+                readTweets.Add(t);
+            }
+
         }
     }
 }

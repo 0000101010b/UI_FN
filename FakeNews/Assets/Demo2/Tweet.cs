@@ -34,5 +34,9 @@ public class Tweet {
     {
         no_hearts++;
     }
-
+    public void repostTweet(int _reposterId)
+    {
+        reposterIds.Add(_reposterId);
+        no_retweets++;
+    }
 }
