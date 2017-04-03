@@ -67,7 +67,7 @@ public class GameController : MonoBehaviour {
         activeEvents.Add("Election");
         activeEvents.Add("ElectOver");
         activeEvents.Add("Housing Crisis");
-        activeEvents.Add("untitled");
+        activeEvents.Add("general");
 
         ArticlesWritten = new List<Article>();
 
