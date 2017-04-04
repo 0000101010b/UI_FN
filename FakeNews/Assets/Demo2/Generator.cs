@@ -8,15 +8,6 @@ using System.Collections.Generic;
 class Generator : MonoBehaviour
 {
     public static int NUMBER_OF_AGENTS = 100;
-    void Start()
-    {
-        List<Agent> agents = new List<Agent>();
-        for (int i = 0; i < NUMBER_OF_AGENTS; i++)
-        {
-            agents.Add(new global::Agent(i));
-        }
-        AgentLoader.saveToFile(agents, "Assets/Resources/agents2.json");
-    }
 }
 
 [Serializable]

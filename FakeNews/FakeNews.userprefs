@@ -1,0 +1,14 @@
+﻿<Properties StartupItem="FakeNews.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Demo2/Agent.cs">
+    <Files>
+      <File FileName="Assets/Demo2/Society.cs" Line="1" Column="1" />
+      <File FileName="Assets/Demo2/Agent.cs" Line="11" Column="2" />
+      <File FileName="Assets/Demo2/Generator.cs" Line="14" Column="25" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

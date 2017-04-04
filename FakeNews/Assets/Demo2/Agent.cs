@@ -7,14 +7,13 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 [Serializable]
 public class Agent {
-    
-
+	
     public float[] personality;
     //public int[] following;
     public string name;
     //public int[] tweetsMade;
     //public int[] tweetsRead;
-    int id;
+    public int id;
     private FSM<Agent> stateMachine;
     public List<int> followingList;
     List<int> tweetMade;
@@ -42,6 +41,7 @@ public class Agent {
         Debug.Log(asset);
         names = JsonUtility.FromJson<NameDatabase>(asset.text);
     }
+
     private int randomProba(float[] probas)
     {
         float proba = UnityEngine.Random.value;
@@ -54,6 +54,7 @@ public class Agent {
         }
         return probas.Length - 1;
     }
+
     private float clamp(float f)
     {
         if (f > 1f)
@@ -62,7 +63,18 @@ public class Agent {
             return -1f;
         return f;
     }
-	
+
+	public void Awake()
+	{
+		this.stateMachine = new FSM<Agent>();
+		this.stateMachine.Init(this, AgentState.Instance);
+	}
+
+	public void Update()
+	{
+		this.stateMachine.Update();
+	}
+
     public Agent(int _id)
     {
         int MAX_FOLLOWERS = 100;
