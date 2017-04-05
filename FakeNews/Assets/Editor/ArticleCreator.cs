@@ -175,9 +175,9 @@ public class ArticleCreator : EditorWindow {
         l.Add(((eGender)gIndex).ToString());
         l.Add(((eRace)raIndex).ToString());
         l.Add(((eReligion)rIndex).ToString());
-        l.Add(((eClass)rIndex).ToString());
+        l.Add(((eClass)cIndex).ToString());
         l.Add(((ePolitics)pIndex).ToString());
-        l.Add(((eNationality)rIndex).ToString());
+        l.Add(((eNationality)nIndex).ToString());
 
         //religion
         for (int i = 0; i < article._pref_religion.Length; i++)
