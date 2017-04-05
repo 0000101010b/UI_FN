@@ -332,18 +332,23 @@ public class Agent {
         for (int i = 0; i < identity.pref_political.Length; ++i)
             opinion_political += identity.pref_political[i] * t.I.pref_political[i];
         opinion_political /= sumOfAbs(identity.pref_political);
-        opinion_poster = (identity.pref_religion[(int)t.I.r] 
-            + identity.pref_ethnicity[(int)t.I.ra] 
-            + identity.pref_gender[(int)t.I.g] 
-            + identity.pref_class[(int)t.I.c] 
-            + identity.pref_nationality[(int)t.I.n] 
-            + identity.pref_political[(int)t.I.p])/sumOfAbs(new float[]{identity.pref_religion[(int)t.I.r],
+        float divide = 2f;
+        try
+        {
+            opinion_poster = (identity.pref_religion[(int)t.I.r]
+                + identity.pref_ethnicity[(int)t.I.ra]
+                + identity.pref_gender[(int)t.I.g]
+                + identity.pref_class[(int)t.I.c]
+                + identity.pref_nationality[(int)t.I.n]
+                + identity.pref_political[(int)t.I.p]) / sumOfAbs(new float[]{identity.pref_religion[(int)t.I.r],
                 identity.pref_ethnicity[(int)t.I.ra],
                 identity.pref_gender[(int)t.I.g],
                 identity.pref_class[(int)t.I.c],
                 identity.pref_nationality[(int)t.I.n],
                 identity.pref_political[(int)t.I.p] });
-        return (opinion_poster + (opinion_religion + opinion_ethnicity + opinion_gender + opinion_class + opinion_nationality + opinion_political) / 6f) / 2f;
+        }
+        catch(Exception e) { opinion_poster = 0f; divide = 1f; }
+        return (opinion_poster + (opinion_religion + opinion_ethnicity + opinion_gender + opinion_class + opinion_nationality + opinion_political) / 6f) / divide;
     }
     public void MakeTweet(ref List<Tweet> tweets)
     {
@@ -355,12 +360,21 @@ public class Agent {
     {
         tweets[t].LikeTweet();
     }
-    public void follow(int t, ref List<Tweet> tweets)
+    public void follow(int t, ref List<Tweet> tweets, Player player)
     {
+        if (followingList.Contains(tweets[t].posterId))
+            return;
         followingList.Add(tweets[t].posterId);
+        if (tweets[t].posterId == -1)
+            player.nb_followers++;
     }
-    public void unfollow(int t, ref List<Tweet> tweets) {
+    public void unfollow(int t, ref List<Tweet> tweets, Player player)
+    {
+        if (!followingList.Contains(tweets[t].posterId))
+            return;
         followingList.Remove(tweets[t].posterId);
+        if (tweets[t].posterId == -1)
+            player.nb_followers--;
     }
     public void retweet(int t, ref List<Tweet> tweets) {
         tweets[t].repostTweet(id);
@@ -376,10 +390,9 @@ public class Agent {
                 {
                     continue;
                 }
-
-                float opinion = OpinionAbout(tweets[t]);
+                float opinion = 3f*OpinionAbout(tweets[t]); //multiply by 3 because those new are very impacting
                 if (opinion < -0.05f && opinion > -0.3)//just boring -> unfollow
-                    unfollow(t, ref tweets);
+                    unfollow(t, ref tweets, p);
                 if (opinion < -0.4)//look ! that guy posts crap
                     retweet(t, ref tweets);
                 if (opinion > 0.1f)//nice !
@@ -410,7 +423,7 @@ public class Agent {
                     continue;
                 float opinion = OpinionAbout(tweets[t]);
                 if (opinion < -0.05f && opinion > -0.3)//just boring -> unfollow
-                    unfollow(t, ref tweets);
+                    unfollow(t, ref tweets,p);
                 if (opinion < -0.4)//look ! that guy posts crap
                     retweet(t, ref tweets);
                 if (opinion > 0.1f)//nice !
@@ -422,13 +435,16 @@ public class Agent {
             for (int j = 0; j < a.tweetsRetweeted.Count; j++)
             {
                 int t = a.tweetsRetweeted[j];
+                float multiplyer = 1.0f;
+                if (tweets[t].posterId == -1)
+                    multiplyer = 3.0f;
                 if (readTweets.Contains(t))
                     continue;
-                float opinion = OpinionAbout(tweets[t]);
+                float opinion = multiplyer*OpinionAbout(tweets[t]);
                 if (opinion < -0.4)//look ! that guy posts crap
-                    follow(t, ref tweets);
+                    follow(t, ref tweets,p);
                 if (opinion > 0.2f)//nice !
-                    follow(t, ref tweets);
+                    follow(t, ref tweets,p);
                 if (opinion > 0.3) //<3
                     retweet(t, ref tweets);
                 readTweets.Add(t);

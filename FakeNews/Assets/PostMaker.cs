@@ -10,6 +10,7 @@ public class PostMaker : MonoBehaviour
 
     public GameObject newsfeed;
     public GameObject prefabTweet;
+    public GameObject n_followers;
     public List<GameObject> newsfeedDisplay;
     List<Tweet> newsfeedTweets;
     public InputField iField;
@@ -83,7 +84,7 @@ public class PostMaker : MonoBehaviour
             //adding to the array                   
             newsfeedDisplay.Add(tweet);
         }
-
+        n_followers.GetComponent<Text>().text = player.nb_followers.ToString();
     }
     /// <summary>
     /// Invokes after clicking on Post Button
@@ -117,7 +118,7 @@ public class PostMaker : MonoBehaviour
         //get text from the input field
 
         string tweetText = text;
-        Tweet tweet = new Tweet(1,"",I);
+        Tweet tweet = new Tweet(-1,"",I);
         tweet.author = "Bob";
         tweet.text = tweetText;
         s.tweets.Add(tweet);

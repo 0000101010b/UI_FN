@@ -42,12 +42,16 @@ public class Society : MonoBehaviour {
             agents.Add(new Agent(i));
         }
 
-		for (int i = 0; i < Generator.NUMBER_OF_AGENTS; i++)
+        for (int i = 0; i < Generator.NUMBER_OF_AGENTS / 2; i++)
         {
             agents[i].followingList.Add(-1);
-			agents[i].Awake();
+            player.nb_followers++;
         }
-		AgentLoader.saveToFile(agents, "Assets/Resources/agents2.json");
+        for (int i = 0; i < Generator.NUMBER_OF_AGENTS; i++)
+        {
+            agents[i].Awake();
+        }
+        AgentLoader.saveToFile(agents, "Assets/Resources/agents2.json");
         StartCoroutine("LinearTime");
         /*
         for (int i = 0; i < 10; i++)
