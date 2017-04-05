@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.5.2f1</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <LangVersion Condition=" '$(VisualStudioVersion)' != '10.0' ">4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -79,15 +77,14 @@
   <ItemGroup>
     <Compile Include="Assets\Article.cs" />
     <Compile Include="Assets\Demo2\Agent.cs" />
+    <Compile Include="Assets\Demo2\AgentState.cs" />
     <Compile Include="Assets\Demo2\Enum.cs" />
     <Compile Include="Assets\Demo2\FSM.cs" />
-    <Compile Include="Assets\Demo2\Free.cs" />
     <Compile Include="Assets\Demo2\Generator.cs" />
     <Compile Include="Assets\Demo2\Player.cs" />
     <Compile Include="Assets\Demo2\Society.cs" />
     <Compile Include="Assets\Demo2\State.cs" />
     <Compile Include="Assets\Demo2\Tweet.cs" />
-    <Compile Include="Assets\Demo2\Working.cs" />
     <Compile Include="Assets\GameController.cs" />
     <Compile Include="Assets\PostMaker.cs" />
     <Compile Include="Assets\TweetLoader.cs" />

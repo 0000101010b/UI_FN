@@ -130,7 +130,7 @@ public class ArticleCreator : EditorWindow {
         nIndex = EditorGUILayout.Popup(nIndex, nationality);
 
         EditorGUILayout.LabelField("Race", EditorStyles.centeredGreyMiniLabel);
-        raIndex = EditorGUILayout.Popup(nIndex, race);
+        raIndex = EditorGUILayout.Popup(raIndex, race);
 
         if(article!=null)
             article.ShowEditGUI();
