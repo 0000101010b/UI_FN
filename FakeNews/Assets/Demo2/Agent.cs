@@ -293,8 +293,10 @@ public class Agent {
 
     public void Update(Player p,List<Agent> agents,ref List<Tweet> tweets)
     {
-        MakeTweet(ref tweets);
+        Tweet t=MakeTweet(ref tweets,1);//i miss obama
+        Society.Instance.newsFeed.MakePost(t);
         ReadNewsFeed(p,agents, ref tweets);
+ 
     }
 
 
@@ -350,11 +352,13 @@ public class Agent {
         catch(Exception e) { opinion_poster = 0f; divide = 1f; }
         return (opinion_poster + (opinion_religion + opinion_ethnicity + opinion_gender + opinion_class + opinion_nationality + opinion_political) / 6f) / divide;
     }
-    public void MakeTweet(ref List<Tweet> tweets)
+    public Tweet MakeTweet(ref List<Tweet> tweets,int tweetIndex)
     {
-        Tweet tweet = new Tweet(id, "im a unicorn", identity);
+        Tweet tweet = TweetLoader.Tweet(this.id,tweetIndex,this.name);
         tweets.Add(tweet);
+        
         tweetMade.Add(tweets.Count - 1);//id of tweet
+        return tweet;
     }
     public void likeTweet(int t, ref List<Tweet> tweets)
     {

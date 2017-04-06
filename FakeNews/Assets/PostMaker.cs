@@ -7,7 +7,7 @@ public class PostMaker : MonoBehaviour
 {
     Player player;
     Society s;
-
+   
     public GameObject newsfeed;
     public GameObject prefabTweet;
     public GameObject n_followers;
@@ -54,21 +54,28 @@ public class PostMaker : MonoBehaviour
     }
 
     // Update is called once per frame
+    int lastUpdate = 0;
     void Update()
     {
+        if(lastUpdate>10)
+        {
+            Draw2();
 
+            lastUpdate = 0;
+        }
+        lastUpdate++;
 
     }
 
     /// <summary>
     /// Drawing the gameobjects on a display
     /// </summary>
-    void Draw()
+    public void Draw()
     {
         //clear the display
         foreach (GameObject g in newsfeedDisplay)
             Destroy(g);
-
+        
         newsfeedDisplay.Clear();
         //assigning each tweet its gameobject 
         for (int i = newsfeedTweets.Count - 1; i >= 0; i--)
@@ -79,13 +86,29 @@ public class PostMaker : MonoBehaviour
             Text[] children = tweet.GetComponentsInChildren<Text>();
             children[0].text = newsfeedTweets[i].author + ":";
             children[1].text = newsfeedTweets[i].text;
-            children[2].text = newsfeedTweets[i].no_retweets + "k";
-            children[3].text = newsfeedTweets[i].no_hearts + "k";
+            children[3].text = newsfeedTweets[i].no_retweets + "";
+            children[2].text = newsfeedTweets[i].no_hearts + "";
             //adding to the array                   
             newsfeedDisplay.Add(tweet);
         }
         n_followers.GetComponent<Text>().text = player.nb_followers.ToString();
     }
+
+    public void Draw2()
+    {
+
+        //assigning each tweet its gameobject 
+        for (int i = newsfeedTweets.Count - 1; i >= 0; i--)
+        {
+            Text[] children = newsfeedDisplay[newsfeedTweets.Count-1-i].GetComponentsInChildren<Text>();
+            children[3].text = newsfeedTweets[i].no_retweets + "";
+            children[2].text = newsfeedTweets[i].no_hearts + "";
+            //adding to the array                   
+        }
+        n_followers.GetComponent<Text>().text = player.nb_followers.ToString();
+    }
+
+
     /// <summary>
     /// Invokes after clicking on Post Button
     /// </summary>
@@ -111,34 +134,37 @@ public class PostMaker : MonoBehaviour
         return f;
     }
    
-    public void MakePost(string author,string text,Identity I)
+    public void MakePost(Tweet tweet)
     {
-        while (newsfeedTweets.Count > 15)
-            newsfeedTweets.RemoveAt(0);
-        //get text from the input field
+        if (newsfeedTweets != null)
+        {
 
-        string tweetText = text;
-        Tweet tweet = new Tweet(-1,"",I);
-        tweet.author = "Bob";
-        tweet.text = tweetText;
-        s.tweets.Add(tweet);
-        player.tweets_Ids.Add(s.tweets.Count-1);
-        
-        //adding to the array
-        newsfeedTweets.Add(tweet);
-        Draw();
+            while (newsfeedTweets.Count > 15)
+                newsfeedTweets.RemoveAt(0);
+            //get text from the input field
+
+
+            s.tweets.Add(tweet);
+            player.tweets_Ids.Add(s.tweets.Count - 1);
+
+            //adding to the array
+            newsfeedTweets.Add(tweet);
+            //Draw();
+        }
 
     }
     public void shareArticle()
     {
         if(articles.Count>0)
         {
-            MakePost("The Failing New York Times", articles[0].subject +" "+ articles[0].content, articles[0].identity);
+            Tweet t=new Tweet (-1,articles[0].subject + " " + articles[0].content, articles[0].identity);
+            MakePost(t);
             articles.RemoveAt(0);
         }
         if (articles.Count == 0)
             share.interactable = false;
 
+        Draw();
     }
         
 

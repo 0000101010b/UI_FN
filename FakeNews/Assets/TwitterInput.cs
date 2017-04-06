@@ -6,8 +6,7 @@ public class TwitterInput : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        Tweet t=TweetLoader.Tweet(1,1);
-        Debug.Log(t.text);
+
 	}
 	
 	// Update is called once per frame

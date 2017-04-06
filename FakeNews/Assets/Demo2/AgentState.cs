@@ -56,7 +56,9 @@ public sealed class Working : State<Agent>
 	{
 		if (Random.Range (0, 10000) < tweetingProb) {
 			Debug.Log ("Have a break, have a kitkat and tweeting~");
-			agent.ReadNewsFeed (Society.Instance.player, Society.Instance.agents, ref Society.Instance.tweets);
+            Tweet t = agent.MakeTweet(ref Society.Instance.tweets, 1);//i miss obama
+            Society.Instance.newsFeed.MakePost(t);
+            agent.ReadNewsFeed (Society.Instance.player, Society.Instance.agents, ref Society.Instance.tweets);
 		}
 	}
 

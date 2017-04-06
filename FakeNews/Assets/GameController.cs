@@ -377,8 +377,6 @@ public class GameController : MonoBehaviour {
         List<string> article = new List<string>();
         for (int i = 0; i < articles.Count; i++)
         {
-
-
             if (articles[i][0][0] == subject && articles[i][1][0] == content)
             {
                 Debug.Log("subject" + subject);

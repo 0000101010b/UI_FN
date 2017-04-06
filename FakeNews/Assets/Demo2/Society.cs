@@ -3,6 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class Society : MonoBehaviour {
+
+
+    public PostMaker newsFeed;
+
 	private static Society instance;
 	public static Society Instance{
 		get { return instance; }
